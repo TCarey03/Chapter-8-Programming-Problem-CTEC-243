@@ -14,7 +14,11 @@ public class Main {
             Scanner fileScanner = new Scanner(file);
 
             while (fileScanner.hasNextLine()) {
-                String name = fileScanner.nextLine();
+                String name = fileScanner.nextLine().trim();
+
+                if (name.isEmpty()) {
+                    continue;
+                }
 
                 if (species.containsKey(name)) {
                     species.put(name, species.get(name) + 1);
@@ -28,15 +32,14 @@ public class Main {
             // Display all species and counts
             System.out.println("Species Population Counts:");
 
-            for (String name : species.keySet()) {
-                System.out.println(name + ": " + species.get(name));
-            }
-
-            // Find the most and least frequent species
             if (species.isEmpty()) {
                 System.out.println("No species were found in the file.");
             } else {
+                for (String name : species.keySet()) {
+                    System.out.println(name + ": " + species.get(name));
+                }
 
+                // Find most and least frequent species
                 String mostFrequentSpecies = "";
                 String leastFrequentSpecies = "";
 
@@ -57,7 +60,7 @@ public class Main {
                     }
                 }
 
-                // Display the results
+                // Display analysis
                 System.out.println("\nPopulation Analysis:");
 
                 System.out.println("Most Frequent Species: "
