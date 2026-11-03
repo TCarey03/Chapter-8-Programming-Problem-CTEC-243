@@ -1,31 +1,41 @@
 import java.util.HashMap;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(String[] args) {
 
         HashMap<String, Integer> species = new HashMap<>();
 
-        // Add species and their population counts
-        species.put("Deer", 120);
-        species.put("Fox", 45);
-        species.put("Rabbit", 200);
-        species.put("Eagle", 15);
-        species.put("Bear", 30);
+        // Read the sightings file
+        try {
+            File file = new File("sightings.txt");
+            Scanner fileScanner = new Scanner(file);
 
-        Scanner scanner = new Scanner(System.in);
+            while (fileScanner.hasNextLine()) {
+                String name = fileScanner.nextLine();
 
-        // Ask the user for a species
-        System.out.print("Enter a species name to search: ");
-        String name = scanner.nextLine();
+                // Update the count if species already exists
+                if (species.containsKey(name)) {
+                    species.put(name, species.get(name) + 1);
+                } else {
+                    // Add new species with a count of 1
+                    species.put(name, 1);
+                }
+            }
 
-        // Check if the species exists
-        if (species.containsKey(name)) {
-            System.out.println(name + " population: " + species.get(name));
-        } else {
-            System.out.println(name + " is not currently in the registry.");
+            fileScanner.close();
+
+            // Display all species and their counts
+            System.out.println("Species Population Counts:");
+
+            for (String name : species.keySet()) {
+                System.out.println(name + ": " + species.get(name));
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: sightings.txt was not found.");
         }
-
-        scanner.close();
     }
 }
