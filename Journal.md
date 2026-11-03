@@ -21,3 +21,15 @@ In this phase, I added a feature that finds the species with the highest and low
 The program updates the most frequent species when it finds a higher count and updates the least frequent species when it finds a lower count.
 
 Finding the highest and lowest populations takes O(n) time because the program must check every species. Looking up one species by name in a HashMap takes O(1) time on average, which is much faster.
+
+-----------------------
+
+Phase 4: Validation & Reflection
+
+In this phase, I tested my program using three different situations. First, I tested an empty sightings.txt file to make sure the program did not crash when there were no species. Next, I tested a file where every species appeared once. Finally, I tested a file where one species appeared multiple times.
+
+The tests helped me make sure the program correctly counted species and identified the highest and lowest populations. I also added a check to ignore empty lines in the file.
+
+An improvement I made was checking whether the HashMap was empty before trying to find the most and least frequent species. This prevents errors when there is no data to analyze.
+
+I learned how HashMaps can store information using keys and values, how to read data from a text file, and how to use loops to analyze population counts.
